@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RX-TOPUP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }body {
+  background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+  color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  background-color: rgba(20, 30, 48, 0.95);
+  padding: 30px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+  text-align: center;
+}
+
+h2 {
+  color: #00f7ff;
+  margin-bottom: 25px;
+  text-shadow: 0 0 5px #00f7ff;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  background-color: #1f2a3a;
+  color: #f0f0f0;
+  font-size: 16px;
+}
+
+select:focus, input:focus {
+  outline: 2px solid #00f7ff;
+}
+
+.copy-box {
+  margin-bottom: 15px;
+}
+
+.copy-text {
+  background: #1f2a3a;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  color: #00f7ff;
+}
+
+.copy-text button {
+  background: #00c9a7;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.copy-text button:hover {
+  background: #00e6b8;
+}
+
+.payment-hint {
+  display: none;
+  background-color: #00c9a7;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.payment-hint.show {
+  display: block;
+}
+
+button.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(to right, #00c9a7, #00f7ff);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s;
+}
+
+button.submit-btn:hover {
+  background: linear-gradient(to right, #00e6b8, #00f7ff);
+}
+
+footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 13px;
+  color: #ccc;
+}
+
+footer hr {
+  border-color: #444;
+  margin-bottom: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔥 RX TOP UP 🔥</h2><!-- Copy Number Box -->
+<div class="copy-box">
+  <div class="copy-text">
+    Send Money: <span id="copyNumber">01910315834</span>
+    <button onclick="copyNumber()">Copy</button>
+  </div>
+</div>
+
+<input type="text" placeholder="Enter your Free Fire ID" id="freeFireId" />
+
+<select id="diamondPackage">
+  <option disabled selected>Select Package</option>
+  <option value="25 Diamond - ৳22">25 Diamond - ৳20</option>
+  <option value="50 Diamond - ৳37">50 Diamond - ৳35</option>
+  <option value="100 Diamond - ৳86">115 Diamond - ৳70</option>
+  <option value="115 Diamond - ৳75">115 Diamond - ৳75</option>
+  <option value="240 Diamond - ৳153">240 Diamond - ৳153</option>
+  <option value="355 Diamond - ৳226">355 Diamond - ৳226</option>
+  <option value="505 Diamond - ৳318">505 Diamond - ৳318</option>
+  <option value="610 Diamond - ৳380">610 Diamond - ৳380</option>
+  <option value="850 Diamond - ৳532">850 Diamond - ৳532</option>
+  <option value="1090 Diamond - ৳682">1090 Diamond - ৳682</option>
+  <option value="1240 Diamond - ৳748">1240 Diamond - ৳748</option>
+  <option value="1850 Diamond - ৳1140">1850 Diamond - ৳1140</option>
+  <option value="2530 Diamond - ৳1517">2530 Diamond - ৳1517</option>
+  <option value="5060 Diamond - ৳2316">5060 Diamond - ৳2316</option>
+  <option value="Level Up Pass - ৳155">Level Up Pass - ৳155</option>
+  <option value="Weekly - ৳158">Weekly - ৳158</option>
+  <option value="Monthly - ৳765">Monthly - ৳765</option>
+</select>
+
+<select id="paymentMethod" onchange="updateNote()">
+  <option value="" disabled selected>Select Payment Method</option>
+  <option value="bKash">bKash</option>
+  <option value="Nagad">Nagad</option>
+</select>
+
+<div class="payment-hint" id="paymentHint"></div>
+
+<input type="text" placeholder="Enter your Transaction ID" id="transactionId" />
+<input type="text" placeholder="Your Number (used to pay)" id="paymentNumber" />
+
+<button class="submit-btn" onclick="submitOrder()">SUBMIT</button>
+
+<!-- Footer -->
+<footer>
+  <hr />
+  <p>© Ahmed Rabby — All Rights Reserved</p>
+</footer>
+
+  </div>  <script>
+    function copyNumber() {
+      const number = document.getElementById("copyNumber").innerText;
+      navigator.clipboard.writeText(number).then(() => {
+        alert("Number copied: " + number);
+      });
+    }
+
+    function updateNote() {
+      const method = document.getElementById("paymentMethod").value;
+      const hint = document.getElementById("paymentHint");
+      if(method === "bKash") {
+        hint.textContent = `Send Money: 01910315834 (bKash)`;
+      } else if(method === "Nagad") {
+        hint.textContent = `Send Money: 01910315834 (Nagad)`;
+      } else {
+        hint.textContent = "";
+      }
+      hint.classList.add("show");
+    }
+
+    function submitOrder() {
+      const freeFireId = document.getElementById("freeFireId").value.trim();
+      const diamondPackage = document.getElementById("diamondPackage").value;
+      const paymentMethod = document.getElementById("paymentMethod").value;
+      const transactionId = document.getElementById("transactionId").value.trim();
+      const paymentNumber = document.getElementById("paymentNumber").value.trim();
+
+      if (!freeFireId || !diamondPackage || !paymentMethod || !transactionId || !paymentNumber) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      const message =
+        `Free Fire ID: ${freeFireId}\n` +
+        `Package: ${diamondPackage}\n` +
+        `Payment Method: ${paymentMethod}\n` +
+        `Transaction ID: ${transactionId}\n` +
+        `Payment Number: ${paymentNumber}`;
+
+      const whatsappUrl = `https://wa.me/01910315834?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
+    }
+  </script></body>
+</html>
